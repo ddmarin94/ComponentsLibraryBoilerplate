@@ -1,4 +1,8 @@
-button {
+.button {
   background-color: tomato;
   border: none;
+
+  &--disabled {
+    background-color: '#F0F0F0'
+  }
 }

@@ -1,4 +1,8 @@
 import React from 'react'
 import './index.scss'
 
-export default ({children}) => <button>{children}</button>
+export const Button = ({children, action, disabled}) => (
+  <button className={`button${disabled ? '--disabled' : ''}`} onClick={action}>
+    {children}
+  </button>
+)

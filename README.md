@@ -158,21 +158,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { withOptions } from "@storybook/addon-options";
 import { withInfo } from "@storybook/addon-info";
 
-// automatically import all files ending in *.stories.js
-const req = require.context('../stories', true, /.stories.js$/);
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-
-// Decorator to add notes
-addDecorator(withNotes);
-// Decorator to add knobs
-addDecorator(withKnobs);
-// Decorator to add info
-addDecorator(withInfo)
-
-// Custom display of our storybook space
-withOptions({
+const screenOptions = withOptions({
   name: "Storybook",
   url: "https://test.com",
   goFullScreen: false,
@@ -181,7 +167,18 @@ withOptions({
   showSearchBox: false,
   downPanelInRight: true,
   sortStoriesByKind: true
-});
+})
+
+addDecorator(screenOptions);
+addDecorator(withNotes);
+addDecorator(withKnobs);
+addDecorator(withInfo);
+
+// automatically import all files ending in *.stories.js
+const req = require.context('../stories', true, /.stories.js$/);
+function loadStories() {
+  req.keys().forEach(filename => req(filename));
+}
 
 configure(loadStories, module);
 ```

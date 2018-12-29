@@ -7,7 +7,7 @@
     "test": "jest --watch",
     "build": "lerna run build --parallel --stream",
     "first:start": "lerna bootstrap --hoist && start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 3001 -c .storybook",
     "build-storybook": "build-storybook"
   },
   "keywords": [],
@@ -29,6 +29,7 @@
     "@storybook/addon-links": "^4.1.4",
     "@storybook/addon-notes": "^4.1.4",
     "@storybook/addon-options": "^4.1.4",
+    "@storybook/addon-viewport": "^4.1.4",
     "@storybook/addons": "^4.1.4",
     "@storybook/react": "^4.0.12",
     "babel-loader": "^8.0.4",

@@ -8,10 +8,10 @@ const screenOptions = withOptions({
   name: "Storybook",
   url: "https://test.com",
   goFullScreen: false,
-  showLeftPanel: true,
-  showDownPanel: true,
+  showStoriesPanel: true,
+  showAddonPanel: true,
   showSearchBox: false,
-  downPanelInRight: true,
+  addonPanelInRight: true,
   sortStoriesByKind: true
 })
 

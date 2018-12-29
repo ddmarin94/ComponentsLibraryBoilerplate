@@ -141,6 +141,52 @@ At this moment our package.json looks like this:
 }
 ```
 
+Now you will see that the bottom panel is not available. In order to have the bottom panel available and add some coolstuff, let's create a file named addons.js inside .storybook folder where we will have the next content:
+
+```js
+import '@storybook/addon-actions/register';
+import '@storybook/addon-links/register';
+import '@storybook/addon-notes/register';
+```
+
+Also in .storybook/config we will have the next config:
+
+```js
+import { configure, addDecorator } from '@storybook/react';
+import { withNotes } from '@storybook/addon-notes';
+import { withKnobs } from '@storybook/addon-knobs';
+import { withOptions } from "@storybook/addon-options";
+import { withInfo } from "@storybook/addon-info";
+
+const screenOptions = withOptions({
+  name: "Storybook",
+  url: "https://test.com",
+  goFullScreen: false,
+  showLeftPanel: true,
+  showDownPanel: true,
+  showSearchBox: false,
+  downPanelInRight: true,
+  sortStoriesByKind: true
+})
+
+addDecorator(screenOptions);
+addDecorator(withNotes);
+addDecorator(withKnobs);
+addDecorator(withInfo);
+
+// automatically import all files ending in *.stories.js
+const req = require.context('../stories', true, /.stories.js$/);
+function loadStories() {
+  req.keys().forEach(filename => req(filename));
+}
+
+configure(loadStories, module);
+```
+
+```shell
+  npm i --save-dev @storybook/addon-info @storybook/addon-knobs @storybook/addon-notes @storybook/addon-options
+```
+
 #### Lerna setup:
 
 If you were thinking about version control now is the moment but first we should install lerna globally and after that let's gonna initialize git:

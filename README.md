@@ -468,11 +468,14 @@ module.exports = require('babel-jest').createTransformer(config);
 ```
 
 Finally we can create a new test file in our button component.
+
+```shell
 |-packages
   |
   |-button
     |
     |-test
       |-button.spec.js    <--
-      
-Now we can run ```npm run test```that should execute jest in watcher mode that will execute all our tests.
+```
+
+Now we can run ```npm run test: jest --watch```that should execute jest in watcher mode that will execute all our tests.

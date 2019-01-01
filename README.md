@@ -444,6 +444,8 @@ First of all, let's going to create in package.json our jest config, that will b
   }
 ```
 
+**identity-obj-proxy allow us to "mock" our .scss files that we will have imported in our components. If we don't have this in our config we would have problems when we try to run our tests.
+
 Also let's going to add our setupTest.js file where we will have our enzyme test config. Should be like:
 
 ```js

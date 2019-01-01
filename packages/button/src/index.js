@@ -10,9 +10,15 @@ export const Button = ({children, action, disabled}) => (
 
 Button.propTypes = {
   /** Text that will receive the button component  */
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node,
   /** Will be executed when button is clicked */
-  action: PropTypes.func.isRequired,
+  action: PropTypes.func,
   /** Enable/disables the botton */
-  disabled: PropTypes.bool.isRequired
+  disabled: PropTypes.bool
+}
+
+Button.defaultprops = {
+  children: 'Click Me!',
+  action: (callback) => callback,
+  disabled: false
 }

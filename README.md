@@ -147,6 +147,9 @@ Now you will see that the bottom panel is not available. In order to have the bo
 import '@storybook/addon-actions/register';
 import '@storybook/addon-links/register';
 import '@storybook/addon-notes/register';
+import '@storybook/addon-knobs/register';
+import '@storybook/addon-options/register';
+import '@storybook/addon-viewport/register';
 ```
 
 Also in .storybook/config we will have the next config:
@@ -162,10 +165,10 @@ const screenOptions = withOptions({
   name: "Storybook",
   url: "https://test.com",
   goFullScreen: false,
-  showLeftPanel: true,
-  showDownPanel: true,
+  showStoriesPanel: true,
+  showAddonPanel: true,
   showSearchBox: false,
-  downPanelInRight: true,
+  addonPanelInRight: true,
   sortStoriesByKind: true
 })
 
@@ -184,7 +187,7 @@ configure(loadStories, module);
 ```
 
 ```shell
-  npm i --save-dev @storybook/addon-info @storybook/addon-knobs @storybook/addon-notes @storybook/addon-options
+  npm i --save-dev @storybook/addon-info @storybook/addon-knobs @storybook/addon-notes @storybook/addon-options @storybook/addon-viewport
 ```
 
 #### Lerna setup:
@@ -347,10 +350,6 @@ You could run the next command ```npm run storybook``` and all should be working
 
 Doing that we get a super basic setup to develop our components in monorepo multipackage. What are the next steps ?
 
-- ***Add support for sass in our components.***
-- ***Add test in our components*** 
-- ***Release a package in npm with lerna.***
-
 ### SASS in our components
 
 In order to add sass support to our library we will need to install a few dependencies in the root of the library:
@@ -424,3 +423,56 @@ This will by our .npmignore:
 packages/**/src
 ```
 
+### Test in our components with jest and Enzyme
+In order to add test in our components we will need to add the next dependencies:
+
+```shell
+npm i --save-dev jest regenerator-runtime babel-jest enzyme enzyme-adapter-react-16 identity-obj-proxy
+```
+
+First of all, let's going to create in package.json our jest config, that will be the next:
+
+```json
+"jest": {
+    "setupTestFrameworkScriptFile": "./setupTests.js",
+    "transform": {
+      "^.+\\.js$": "./jestTransformer.js"
+    },
+    "moduleNameMapper": {
+      "^.+\\.scss$": "identity-obj-proxy"
+    }
+  }
+```
+
+Also let's going to add our setupTest.js file where we will have our enzyme test config. Should be like:
+
+```js
+const Enzyme = require('enzyme');
+const EnzymeAdapter = require('enzyme-adapter-react-16');
+
+// Setup enzyme's react adapter
+Enzyme.configure({ adapter: new EnzymeAdapter() });
+```
+
+Now let's going to create an other file called jestTransformer where we will have all the presets that we need to develop our tests and finally let's require babel-jest and a create a tranformer with the config setted previously.
+
+```js
+const config = {
+  presets: [
+      '@babel/preset-env',
+      '@babel/preset-react',
+  ],
+};
+
+module.exports = require('babel-jest').createTransformer(config);
+```
+
+Finally we can create a new test file in our button component.
+|-packages
+  |
+  |-button
+    |
+    |-test
+      |-button.spec.js    <--
+      
+Now we can run ```npm run test```that should execute jest in watcher mode that will execute all our tests.

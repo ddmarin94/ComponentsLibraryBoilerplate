@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-sass": "^4.11.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
@@ -42,6 +41,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "lerna": "^3.6.0",
+    "node-sass": "^4.11.0",
     "path": "^0.12.7",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2",

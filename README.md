@@ -6,9 +6,6 @@ Here you will find an index of the diferents parts of this readme:
 
 #### [Which tools we will use?](Tools)
 
-#### [Basic Setup](Let's start to build our setup)
-
-
 
 ## Tools
 

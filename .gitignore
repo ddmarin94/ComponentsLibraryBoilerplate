@@ -3,6 +3,7 @@ build
 node_modules
 *.log
 package-lock.json
+storybook-static
 
 packages/**/node_modules
 packages/**/package-lock.json

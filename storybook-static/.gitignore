@@ -1,8 +1,0 @@
-.DS_Store
-build
-node_modules
-*.log
-package-lock.json
-
-packages/**/node_modules
-packages/**/package-lock.json

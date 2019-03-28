@@ -15,4 +15,3 @@ jobs:
       if: branch = master AND NOT type = pull_request
       script:
         - npm run build-storybook
-        - npm run deploy-storybook

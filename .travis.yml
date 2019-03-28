@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+  - '8'
+install:
+  - npm install
+jobs:
+  include:
+    - stage: PR VS Master
+      if: type = pull_request
+      script:
+        - npm run test
+        - npm run build
+    - stage: Master deploy demo environment
+      if: branch = master AND NOT type = pull_request
+      script:
+        - npm run build-storybook
+        - npm run deploy-storybook
